@@ -17,7 +17,10 @@ project_id = client.project
 dest_dataset = "crimes_dataset"
 view_dataset = "views"
 delta = timedelta(days=1)
-
+# columns = os.getenv("default_cols")
+columns = ["unique_key", "case_number", "date",
+            "block", "description", "location_description",
+            "arrest", "location"]
 os.environ["start_date"] = "2020, 01, 01"
 os.environ["end_date"] = "2020, 03, 31"
 
@@ -33,9 +36,8 @@ def main(request):
 
     cur_date = get_date(start_date, end_date)
     raw_table_id = fetch_save_daily_data(cur_date, client, project_id, dest_dataset)
-    create_view_table(client, raw_table_id, view_dataset)
+    if request["columns"] and isinstance(request["columns"], list or tuple):
+        columns = ", ".join(request["columns"])
+        create_view_table(client, raw_table_id, view_dataset, columns)
     return "success"
-
-
-
 

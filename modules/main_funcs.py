@@ -28,18 +28,20 @@ def fetch_save_daily_data(cur_date, client, project_id,
     return table_id
 
 
-def create_view_table(client, table_id, view_dataset):
-    # project, dataset, table_name = table_id.split(".")
+def create_view_table(client, table_id, view_dataset, cols):
     view_table = table_id.replace(table_id.split(".")[1], view_dataset)
-    # view_table_id = f"{project}.{view_dataset}.{table_name}"
+    # cols = ["unique_key", "case_number", "date",
+    #         "block", "description", "location_description",
+    #         "arrest", "location"]
+
+    # sheamoowmeb requestshi tu aris none tu None aris mashin custom
+    # columns environemntidan vadzzlevt pirdapir tu requestshi aris
+    # columns sheudzlia iyos list/tuple, tua list/tuple vajoinebt
 
     sql = f"""CREATE VIEW {view_table} AS
         SELECT 
-        unique_key, case_number, date,
-        block, description, location_description, 
-        arrest, location	
-        FROM {table_id}
-        WHERE arrest = true;"""
+        {cols}
+        FROM {table_id}; """
 
     query_job = client.query(sql)
     query_job.result()
