@@ -1,8 +1,8 @@
 from google.cloud import bigquery
 
 
-def fetch_save_data(cur_date, client, project_id,
-                    dest_dataset):
+def fetch_save_daily_data(cur_date, client, project_id,
+                          dest_dataset):
     query_string = f"""
         SELECT * FROM
         `bigquery-public-data.chicago_crime.crime`
@@ -19,7 +19,8 @@ def fetch_save_data(cur_date, client, project_id,
             create_bqstorage_client=True,
         )
     )
-    table_id = f'{project_id}.{dest_dataset}.crimes-{cur_date}'
+    table_date = str(cur_date).replace("-", "_")
+    table_id = f'{project_id}.{dest_dataset}.crimes_{table_date}'
     job = client.load_table_from_dataframe(
         dataframe, table_id
     )
@@ -27,16 +28,18 @@ def fetch_save_data(cur_date, client, project_id,
     return table_id
 
 
-def create_view_table(client, cur_date, project_id,
-                      dest_dataset, table_id):
-    view_table_id = f"{project_id}.{dest_dataset}.view-crimes-{cur_date}"
-    sql = f"""CREATE VIEW {view_table_id}
-        OPTIONS(
-            description = 'View table from crimes'
-        ) AS
-        SELECT unique_key
+def create_view_table(client, table_id, view_dataset):
+    # project, dataset, table_name = table_id.split(".")
+    view_table = table_id.replace(table_id.split(".")[1], view_dataset)
+    # view_table_id = f"{project}.{view_dataset}.{table_name}"
+
+    sql = f"""CREATE VIEW {view_table} AS
+        SELECT 
+        unique_key, case_number, date,
+        block, description, location_description, 
+        arrest, location	
         FROM {table_id}
-        WHERE arrest = true
-        GROUP BY primary_type;"""
+        WHERE arrest = true;"""
+
     query_job = client.query(sql)
     query_job.result()

@@ -1,7 +1,7 @@
 import os
 from datetime import date, timedelta
 from modules.get_date import get_date
-from modules.main_funcs import fetch_save_daily_data
+from modules.main_funcs import fetch_save_daily_data,create_view_table
 from google.cloud import bigquery
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'key.json'
@@ -15,6 +15,7 @@ for dataset in datasets:
 
 project_id = client.project
 dest_dataset = "crimes_dataset"
+view_dataset = "views"
 delta = timedelta(days=1)
 
 os.environ["start_date"] = "2020, 01, 01"
@@ -31,8 +32,8 @@ def main(request):
     end_date = date(end_year, end_month, end_day)
 
     cur_date = get_date(start_date, end_date)
-    fetch_save_daily_data(cur_date, client, project_id, dest_dataset)
-
+    raw_table_id = fetch_save_daily_data(cur_date, client, project_id, dest_dataset)
+    create_view_table(client, raw_table_id, view_dataset)
     return "success"
 
 
