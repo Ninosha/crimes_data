@@ -1,7 +1,7 @@
 import os
 from datetime import date, timedelta
-from modules.get_date import get_date
-from modules.main_funcs import fetch_save_daily_data,create_view_table
+from CF.modules.get_date import get_date
+from CF.modules.main_funcs import fetch_save_daily_data, create_view_table
 from google.cloud import bigquery
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'key.json'
@@ -36,8 +36,6 @@ def main(request):
 
     cur_date = get_date(start_date, end_date)
     raw_table_id = fetch_save_daily_data(cur_date, client, project_id, dest_dataset)
-    if request["columns"] and isinstance(request["columns"], list or tuple):
-        columns = ", ".join(request["columns"])
-        create_view_table(client, raw_table_id, view_dataset, columns)
+    create_view_table(client, raw_table_id, view_dataset, columns)
     return "success"
 

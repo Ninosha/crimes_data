@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bitcoindata-352508",
+  "private_key_id": "dd5793380cafc48d22fd1f0b8618d695350f2fb1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCZqs+MMqSmpVKQ\nBr/Tf6/ciJGPMdnjDXjcCfbxgdZA1SXLPHWbSP/+aWbUoZdD3f8LeYKxCWBbBcST\nfwGCsBjP/HZS3D1VXNfRs8XU0ETnz7iB3rvMh5eSIKnMs4E3Z/r6OUws2eMC3qzz\npcmc6KHDyIADsR15QWMKXvr0HUnYUIkVLUby+FAw6gXTMuzEYg5NU47D+Vicx6T2\nYjLKHZabg9OZxPVBc8Pkw8PjdFTRaOLcEa9z95EiEWIJfQUvAwf+aGQ0jz9DKabU\nVxU5g8U9aqZoT79Z+zyVX3397IS1hUZAA9nUtgk5YSHH+vaMI11tbegM04v+HHPE\nSBjWSW93AgMBAAECggEAPJnZxvLz7wp0wHsA7JJHEwRCz0N8J6hY+QHvArhO+/tz\nL67UvJwx5K3BkWp2opuqaOaPLW1CtDLWnspwGI+FAYURTsUvZPo73KX2h2JpQjgv\njfv+eP8iPc0m2aUS+PxHRKYTDf8RoUCa2W2Q0JIHtZPdNFeFhZvNSLpDYsEoLaec\nl8kgYBvfu0IG4rKeSHMUJuiTD8zPXjVwoSDEzbeuWm/Uah8Al36r5BIpMqQMyKdT\nV15B3HX2V8uKOVnIylecGo7vZcqV5Jn8ce5g3XSHuADQHhxR1EOcMOlVHbzQiDq+\nkHS9Go6lBFOxfQULQYKHdXFd4SZYP2NAAVVZ/3MQxQKBgQDNT7Khl4j2i9F5+jis\n0Fb6kM9gh1DJKccgPSS4QyX71x1whHJMCTPHWlcZavWwTiz4aS4NgzOONv9fMuhg\nqN1ZusYzd7Nc7/90UnQgg9Vn+sVxif22diknLOTUtFGzFu33S4aNdB3M538jU1FV\nCOy+Y0lc3VfhYepe5+X95ZQCswKBgQC/mwx9na1d9lHC25epFFhKZbdqIkDBEDEH\npHXfnOq3qfTqrGou7XHW7I2MQeVUIaYWcyumT7eEpsvYApBSm7nrb5YvmfLpUiaY\nqyH9C+Fpuvxot4xDDmhoUVxRJusIKnyYvY2hkUFq3mXuOWfTAJ4u9Gw7pKMoo6On\nRqQCiUoyLQKBgHQRjFEiVAHdxY0J0qSQG7wHxdUyao9vGO22411wSLb5Q+FqXxtx\nUF5xSjBKcZ88ctv0yl5FQA40NWbiZtDOZmTl3EsYbsQpwedG/fOr1Ce2c4zekBpo\n7pcBIFTHpDB01A8sGWM6s+Y1MYENBzvlkcGIa98eGyKFsnP48eL5uRVVAoGAP/pK\nqmsK53QHCvR96IQVkwnxu2uiiZSZen7MqRThPuBuGinl7rN0LpqgDPQ32ea+aYKd\nUZQOqCl1qTP58stywg1pbY2PEZ9PqeyCldbwtngsLd8T45QdArAgDizbj8d4ARxR\n/V/eIwwNpwTeCROMvgr5VNT9ceVqEMHCo+IptyUCgYB7R3YmM98OX5+nUpAF5Fqo\n3bdquJs/8ednyC/0wB79kP9MQvRg+nxKNxD34KZ4yy/7SoiseRQ8W6yw4lrc6P49\nlHTWH8jHrRwCmqd1CJG4QaNsB9NnNxD0T74rVJ+xXzrqvYHZcWjjwBQK3h1Fx5tA\nunk6Th0wxCxzx7t47+mICw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "ew-468@bitcoindata-352508.iam.gserviceaccount.com",
+  "client_id": "105049584240502359840",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ew-468%40bitcoindata-352508.iam.gserviceaccount.com"
+}

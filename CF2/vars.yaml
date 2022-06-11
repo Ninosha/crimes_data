@@ -1,0 +1,7 @@
+start_date: 2020, 1, 1
+end_date: 2020, 3, 31
+dest_dataset: crimes_dataset
+view_dataset: views
+default_cols: unique_key, case_number, date,
+            block, description, location_description,
+            arrest, location
