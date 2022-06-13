@@ -1,5 +1,6 @@
 from google.cloud.exceptions import NotFound
 import logging
+from google.cloud import pubsub_v1
 
 
 def table_exists(client, dest_table_id):
@@ -36,3 +37,18 @@ def copy_table(client, source_table_id, dest_table_id):
         logging.error(
             f"Encountered errors while deleting values: {e}"
         )
+
+
+def create_push(project_id, topic_id, pub_sub_message):
+    """
+    creates push to pub sub with required data
+    :param project_id: str
+    :param topic_id: str
+    :param pub_sub_message: dict
+    :return:
+    """
+    publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(project_id, topic_id)
+    published = publisher.publish(topic_path, data=pub_sub_message)
+    published.result()
+    logging.info("pub/sub push message sent")
