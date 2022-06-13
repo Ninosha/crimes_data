@@ -37,8 +37,7 @@ def api_to_bigquery(event, context):
         request = data["request_type"]
 
         table_name = data["table_name"]
-        dst_table_name = table_name.replace \
-            (table_name[-10:], current_time)
+        dst_table_name = table_name + "_updated_" + current_time
 
         # source table/destination table name for copying tables
         source_table_id = SOURCE_TABLE_DATASET + "." + table_name
