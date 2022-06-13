@@ -1,7 +1,7 @@
 import os
 from datetime import date, timedelta
-from CF.modules.get_date import get_date
-from CF.modules.main_funcs import fetch_save_daily_data, create_view_table
+from modules.get_date import get_date
+from modules.main_funcs import fetch_save_daily_data, create_view_table
 from google.cloud import bigquery
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'key.json'
@@ -17,12 +17,7 @@ project_id = client.project
 dest_dataset = "crimes_dataset"
 view_dataset = "views"
 delta = timedelta(days=1)
-# columns = os.getenv("default_cols")
-columns = ["unique_key", "case_number", "date",
-            "block", "description", "location_description",
-            "arrest", "location"]
-os.environ["start_date"] = "2020, 01, 01"
-os.environ["end_date"] = "2020, 03, 31"
+columns = os.getenv("default_cols")
 
 
 def main(request):

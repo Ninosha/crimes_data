@@ -1,10 +1,11 @@
-gcloud functions deploy crime_data \
+gcloud functions deploy crime_api_bgq \
     --project=bitcoindata-352508 \
     --region=europe-west1 \
-    --entry-point=main \
+    --entry-point=api_to_bigquery \
     --memory=512MB \
     --runtime=python38 \
     --service-account=ew-468@bitcoindata-352508.iam.gserviceaccount.com	 \
     --env-vars-file=./vars.yaml \
-    --trigger-http \
+    --trigger-resource crimes \
+    --trigger-event google.pubsub.topic.publish \
     --timeout=540s

@@ -1,6 +1,6 @@
-def read(client, table_id):
+def read(client, table_dataset, table_name):
 
-    query_string = f"""SELECT * FROM {table_id}"""
+    query_string = f"""SELECT * FROM {table_dataset}.{table_name}"""
 
     dataframe = (
         client.query(query_string)
@@ -9,4 +9,4 @@ def read(client, table_id):
     )
     data = dataframe.head()
 
-    return data.to_json()
+    return data.to_dict(orient="records")
