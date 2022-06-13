@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 from google.cloud import bigquery
 import os
@@ -54,11 +55,6 @@ def read_views(table_name: str):
     data = read(client, VIEWS_DATASET, table_name)
     return {"data": data}
 
-# @app.delete("/table")
-# def delete_table(table_name: str):
-#     req_type = "delete"
-#     data = message({"request_type": req_type, "table_name": table_name,
-#                     "column_name": column_name,
-#                     "value": value})
-#     create_push(project_id, topic_id, data)
-#     return "item"
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=8080)
