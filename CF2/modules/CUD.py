@@ -3,6 +3,13 @@ import logging
 
 
 def table_insert_rows(client, table_id, rows_to_insert):
+    """
+    function inserts row into table
+    :param client: client object
+    :param table_id: str
+    :param rows_to_insert: dict
+
+    """
     try:
         rows_df = pd.DataFrame([rows_to_insert])
         job = client.load_table_from_dataframe(rows_df, table_id)
@@ -15,16 +22,19 @@ def table_insert_rows(client, table_id, rows_to_insert):
 
 
 def update_values(client, table_name, column, value):
+    """
+    function updates values in table
+    :param client: client onject
+    :param table_name: str
+    :param column: str
+    :param value: str
+    """
     try:
         sql_all = f"""
                 UPDATE {table_name} 
                 SET {column} = '{value}' 
                 WHERE 1=1;
                 """
-
-        # columns = data.keys()
-        # values = data.values()
-        # update_statement = f'UPDATE {table_id} SET ({", ".join(columns)}) = ({", ".join(values)})'
 
         query_job = client.query(sql_all)
         query_job.result()
@@ -37,6 +47,13 @@ def update_values(client, table_name, column, value):
 
 
 def delete_rows(client, table_name, column, value):
+    """
+    function deletes values in table
+    :param client: client onject
+    :param table_name: str
+    :param column: str
+    :param value: str
+    """
     try:
         query_delete = f"""
             DELETE FROM {table_name} WHERE {column} = '{value}';
@@ -49,14 +66,3 @@ def delete_rows(client, table_name, column, value):
             f"Encountered errors while deleting values: {e}"
 
         )
-
-# def delete_table(table_id, client):
-#     try:
-#         client.delete_table(table_id)
-#         logging.info(f"Deleted table {table_id}")
-#     except Exception as e:
-#         logging.error(
-#             f"Encountered errors while deleting table: {e}"
-#         )
-
-

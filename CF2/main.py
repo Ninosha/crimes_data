@@ -4,6 +4,7 @@ import base64
 import os
 from datetime import datetime
 
+import uvicorn
 
 from modules.CUD import table_insert_rows, update_values, delete_rows
 from google.cloud import bigquery
@@ -45,7 +46,7 @@ def api_to_bigquery(event, context):
 
         # copy table from source to destination to update/add/delete
         if not table_exists(client, dest_table):
-            copy_table(client, source_table_id, dest_table, bigquery)
+            copy_table(client, source_table_id, dest_table)
 
         # adds/updates/deletes rows/values according to request type
         if request == "post":
@@ -55,14 +56,6 @@ def api_to_bigquery(event, context):
             column = data["column_name"]
             value = data["value"]
             update_values(client, dest_table, column, value)
-        elif request == "delete":
-            column = data["column_name"]
-            value = data["value"]
-            delete_rows(client, dest_table, column, value)
-        elif request == "put":
-            column = data["column_name"]
-            value = data["value"]
-            update_values(client, column, value, dest_table)
         elif request == "delete":
             column = data["column_name"]
             value = data["value"]
