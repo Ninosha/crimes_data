@@ -3,11 +3,13 @@ from google.cloud import bigquery
 import os
 from modules.utils import message, create_push
 from modules.read import read
-from vars import TOPIC_ID, TABLE_DATASET, VIEWS_DATASET
+
+TOPIC_ID = os.getenv("TOPIC_ID")
+TABLE_DATASET = os.getenv("TABLE_DATASET")
+VIEWS_DATASET = os.getenv("VIEWS_DATASET")
 
 app = FastAPI()
-os.environ[
-    'GOOGLE_APPLICATION_CREDENTIALS'] = "/home/ninosha/Desktop/projects/achisproeqti/key.json"
+
 client = bigquery.Client()
 project_id = client.project
 
