@@ -1,10 +1,5 @@
-import os
-
 import pandas as pd
 import logging
-from utils import create_push
-
-TOPIC_ID = os.getenv("topic_id")
 
 
 def table_insert_rows(client, table_id, rows_to_insert):
@@ -21,10 +16,7 @@ def table_insert_rows(client, table_id, rows_to_insert):
         job.result()
         logging.info("New rows have been added.")
     except Exception as e:
-        message = f"Encountered errors while inserting rows: {e}"
-        logging.error(message)
-        pub_sub_message = {"message": message}
-        create_push(client.project, TOPIC_ID, pub_sub_message)
+        logging.error(f"Encountered errors while inserting rows: {e}")
 
 
 def update_values(client, table_name, column, value):
@@ -44,13 +36,11 @@ def update_values(client, table_name, column, value):
 
         query_job = client.query(sql_all)
         query_job.result()
-        logging.info(
-            f"column: {column} in table {table_name} updated")
+        logging.info(f"column: {column} in table {table_name} updated")
+
     except Exception as e:
         message = f"Encountered errors while updating values: {e}"
         logging.error(message)
-        pub_sub_message = {"message": message}
-        create_push(client.project, TOPIC_ID, pub_sub_message)
 
 
 def delete_rows(client, table_name, column, value):
@@ -67,9 +57,9 @@ def delete_rows(client, table_name, column, value):
         """
         job = client.query(query_delete)
         job.result()
-        logging.info(f"Values {value} deleted in {column}")
+
+        logging.info( f"rows with value {value} deleted in {column}")
+
     except Exception as e:
-        message = f"Encountered errors while deleting values: {e}"
-        logging.error(message)
-        pub_sub_message = {"message": message}
-        create_push(client.project, TOPIC_ID, pub_sub_message)
+
+        logging.error(f"Encountered errors while deleting values: {e}")

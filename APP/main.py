@@ -4,8 +4,7 @@ import logging
 from fastapi import FastAPI
 from modules.read import read
 from google.cloud import bigquery
-from modules.utils import message, create_push
-
+from modules.utils import message, create_push, push_and_log
 
 TOPIC_ID = os.getenv("TOPIC_ID")
 TABLE_DATASET = os.getenv("TABLE_DATASET")
@@ -29,9 +28,11 @@ def insert_rows(table_name: str, rows: dict or list):
     req_type = "post"
     data = message({"request_type": req_type, "table_name": table_name,
                     "rows": rows})
-    create_push(project_id, TOPIC_ID, data)
-    logging.info(f"insert rows request send on table {table_name}")
-    return {"client_host": [table_name, rows]}
+
+    result = f"insert rows request send on table {table_name}"
+    push_and_log(project_id, TOPIC_ID, data, result)
+
+    return {"message": result}
 
 
 @app.put("/data")
@@ -40,9 +41,10 @@ def update_row(table_name: str, column_name: str, value: str or int):
     data = message({"request_type": req_type, "table_name": table_name,
                     "column_name": column_name,
                     "value": value})
-    create_push(project_id, TOPIC_ID, data)
-    logging.info(f"update rows request send on table {table_name}")
-    return "success"
+    result = f"update rows request send on table {table_name}"
+    push_and_log(project_id, TOPIC_ID, data, result)
+
+    return {"message": result}
 
 
 @app.delete("/data")
@@ -51,9 +53,9 @@ def delete_row(table_name: str, column_name: str, value: str or int):
     data = message({"request_type": req_type, "table_name": table_name,
                     "column_name": column_name,
                     "value": value})
-    create_push(project_id, TOPIC_ID, data)
-    logging.info(f"delete rows request send on table {table_name}")
-    return "item"
+    result = f"delete rows request send on table {table_name}"
+    push_and_log(project_id, TOPIC_ID, data, result)
+    return {"message": result}
 
 
 @app.get("/views")
@@ -65,8 +67,6 @@ def read_views(table_name: str):
 
 if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=8080)
-
-
 
 # TOPIC_ID
 #

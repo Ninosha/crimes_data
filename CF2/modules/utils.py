@@ -49,6 +49,7 @@ def create_push(project_id, topic_id, pub_sub_message):
     """
     publisher = pubsub_v1.PublisherClient()
     topic_path = publisher.topic_path(project_id, topic_id)
-    published = publisher.publish(topic_path, data=pub_sub_message)
+    my_str_as_bytes = str(pub_sub_message).encode('utf-8')
+    published = publisher.publish(topic_path, data=my_str_as_bytes)
     published.result()
     logging.info("pub/sub push message sent")

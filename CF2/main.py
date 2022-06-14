@@ -3,18 +3,15 @@ import json
 import base64
 import os
 from datetime import datetime
-
-import uvicorn
-
-from modules.CUD import table_insert_rows, update_values, delete_rows
 from google.cloud import bigquery
+from modules.CUD import table_insert_rows, update_values, delete_rows
 from modules.utils import copy_table, table_exists
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'key.json'
-# SOURCE_TABLE_DATASET = os.getenv("source_dest")
-# DESTINATION_DATASET = os.getenv("dest_dataset")
-SOURCE_TABLE_DATASET = "bitcoindata-352508.crimes_dataset"
-DESTINATION_DATASET = "bitcoindata-352508.updated_crimes"
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'key.json'
+SOURCE_TABLE_DATASET = os.getenv("source_dest")
+DESTINATION_DATASET = os.getenv("dest_dataset")
+# SOURCE_TABLE_DATASET = "bitcoindata-352508.crimes_dataset"
+# DESTINATION_DATASET = "bitcoindata-352508.updated_crimes"
 client = bigquery.Client()
 
 
